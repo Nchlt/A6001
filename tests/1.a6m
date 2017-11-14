@@ -1,0 +1,9 @@
+main(integer x) (
+  var []integer tab;
+  var integer dada;
+
+  tab := [10]integer;
+  tab[2] := 37;
+  
+
+)
