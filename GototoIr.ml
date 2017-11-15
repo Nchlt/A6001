@@ -74,6 +74,11 @@ let flatten_main p =
     function
       | Literal(lit) -> [], T.Literal(lit)
       | Location(Identifier id) -> [], T.Identifier(id)
+      | Location(ArrayAccess(e1, e2)) ->
+        let ce1, ve1 = flatten_expression e1 in
+        let ce2, ve2 = flatten_expression e2 in
+        let res = new_tmp() in
+        (ce1 @ ce2, T.Identifier(res))
       | Binop(op, e1, e2) ->
 	let ce1, ve1 = flatten_expression e1 in
 	let ce2, ve2 = flatten_expression e2 in

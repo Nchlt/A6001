@@ -81,22 +81,24 @@ let generate_main p =
     | New(dest, value)  ->
       let i = match find_alloc dest with
         | Reg r   -> failwith "AllocatedToMips 83 : Reg alloc NYI"
-        | Stack o ->
-          load_value t0 (Identifier(dest)) @@ load_value a0 value @@ sw a0 o t0
+        | Stack o -> sw v0 o ~$fp
           (* On  met la taille du tableau dans l'en tête *)
       in
-      i                     @@
       li ~$v0 9             @@ (*9 pour sbrk*)
       li ~$t1 4             @@
+      load_value a0 value   @@
       mul a0 a0 t1          @@
-      addi a0 a0 4          @@ (* on veut allouer (4 + 4 * taille) octets  *)
-      syscall
+      addi a0 a0 4          @@
+      addi t0 a0 0          @@ (* on veut allouer (4 + 4 * taille) octets  *)
+      syscall               @@
+      sw t0 0 v0            @@
+      i
 
       (* Remarque : pour l'instant, on stocke les booléens sur 4 octets comme les
       entiers même si on pourrait faire mieux *)
 
-    | Load(dest, access) -> (*failwith "DADA"*)
-      let dada = match find_alloc dest with
+    | Load(dest, access) -> failwith "LOAD"
+      (* let dada = match find_alloc dest with
         | Reg r   -> failwith "AllocatedToMips 100 : Reg alloc NYI"
         | Stack o -> load_value t1 (Identifier(dest))
       in
@@ -105,10 +107,12 @@ let generate_main p =
       li t0 4         @@
       load_value t1 i @@
       mul t0 t0 t1    @@
-      addi t0 t0 4    @@ (* à ce moment, t0 contient l'addresse de t[i] *)
+      addi t0 t0 4    @@
+      load_value t1 array_addr@@
+      add t0 t0 t1 @@ (* à ce moment, t0 contient offset de l'addresse de t[i] *)
       lw t0 0 t0      @@
       dada            @@
-      sw t0 0 t1
+      sw t0 0 t1 *)
 
       (* let array_addr, i = access in
       load_value t0 array_addr @@

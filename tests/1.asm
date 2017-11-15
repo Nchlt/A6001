@@ -4,28 +4,36 @@
 	lw $a0, 0($a1)
 	jal atoi
 	sw $v0, 0($fp)
-	addi $sp, $sp, -12
+	addi $sp, $sp, -16
 #_main_0
-	lw $t0, -4($fp)
-	li $a0, 10
-	sw $a0, -4($t0)
 	li $v0, 9
 	li $t1, 4
+	li $a0, 10
 	mul $a0, $a0, $t1
 	addi $a0, $a0, 4
+	addi $t0, $a0, 0
 	syscall
+	sw $t0, 0($v0)
+	sw $v0, -8($fp)
 #_main_1
-	lw $t0, -4($fp)
-	sw $t0, -12($fp)
+	lw $t0, -8($fp)
+	sw $t0, -16($fp)
 #_main_2
 	li $t0, 2
 	li $t1, 4
 	mul $t0, $t0, $t1
 	addi $t0, $t0, 4
-	lw $t1, -12($fp)
+	lw $t1, -16($fp)
 	add $t0, $t0, $t1
 	li $t1, 37
 	sw $t1, 0($t0)
+#_main_3
+	lw $t0, -4($fp)
+	sw $t0, -12($fp)
+#_main_4
+	lw $a0, -12($fp)
+	li $v0, 11
+	syscall
 	li $v0, 10
 	syscall
 atoi:
