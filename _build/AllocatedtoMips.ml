@@ -100,7 +100,7 @@ let generate_main p =
     | Load(dest, access) ->
        let dada = match find_alloc dest with
         | Reg r   -> failwith "AllocatedToMips 102 : Reg alloc NYI"
-        | Stack o -> load_value t1 (Identifier(dest))
+        | Stack o -> lw t1 o fp
       in
       let array_addr , i = access in
 

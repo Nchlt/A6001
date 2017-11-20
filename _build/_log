@@ -132,7 +132,7 @@ ocamlfind ocamlopt -c -w -40 -o UntypedtoGoto.cmx UntypedtoGoto.ml # cached
 # Target: AllocatedtoMips.cmx, tags: { compile, extension:cmx, extension:ml, file:AllocatedtoMips.cmx, file:AllocatedtoMips.ml, implem, native, ocaml, quiet, traverse }
 ocamlfind ocamlopt -c -w -40 -o AllocatedtoMips.cmx AllocatedtoMips.ml
 # Target: Main.cmx, tags: { compile, extension:cmx, extension:ml, file:Main.cmx, file:Main.ml, implem, native, ocaml, quiet, traverse }
-ocamlfind ocamlopt -c -w -40 -o Main.cmx Main.ml
+ocamlfind ocamlopt -c -w -40 -o Main.cmx Main.ml # cached
 # Target: Main.native, tags: { dont_link_with, extension:native, file:Main.native, link, native, ocaml, program, quiet, traverse }
-ocamlfind ocamlopt -linkpkg SourceAst.cmx UntypedAst.cmx GotoAst.cmx IrAst.cmx AllocatedAst.cmx Mips.cmx AllocatedtoMips.cmx GototoIr.cmx Graph.cmx GraphColoring.cmx IrLiveness.cmx IrDeadCodeElim.cmx IrInterferenceGraph.cmx IrtoAllocated.cmx SourceInterpreter.cmx SourceParser.cmx SourceLexer.cmx SourceTypeChecker.cmx SourcetoUntyped.cmx UntypedtoGoto.cmx Main.cmx -o Main.native
+ocamlfind ocamlopt -linkpkg SourceAst.cmx UntypedAst.cmx GotoAst.cmx IrAst.cmx AllocatedAst.cmx Mips.cmx AllocatedtoMips.cmx GototoIr.cmx Graph.cmx GraphColoring.cmx IrLiveness.cmx IrDeadCodeElim.cmx IrInterferenceGraph.cmx IrtoAllocated.cmx SourceInterpreter.cmx SourceParser.cmx SourceLexer.cmx SourceTypeChecker.cmx SourcetoUntyped.cmx UntypedtoGoto.cmx Main.cmx -o Main.native # cached
 # Compilation successful.
