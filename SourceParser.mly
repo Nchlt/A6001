@@ -93,8 +93,8 @@ expression:
 | BEGIN; e=expression; END                          { e                 }
 | e1=expression; op=binop; e2=expression            { Binop(op, e1, e2) }
 | OPEN_BRACKET; e=expression; CLOSE_BRACKET; t=typ  { NewArray(e, t)    }
-| e1=expression; OPEN_BRACKET; e2=expression; CLOSE_BRACKET
-                                                    { Location( ArrayAccess(e1, e2) ) }
+/*| e1=expression; OPEN_BRACKET; e2=expression; CLOSE_BRACKET
+                                                    { Location( ArrayAccess(e1, e2) ) }*/
 
 ;
 

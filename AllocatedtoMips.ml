@@ -97,9 +97,9 @@ let generate_main p =
       (* Remarque : pour l'instant, on stocke les booléens sur 4 octets comme les
       entiers même si on pourrait faire mieux *)
 
-    | Load(dest, access) -> failwith "LOAD"
-      (* let dada = match find_alloc dest with
-        | Reg r   -> failwith "AllocatedToMips 100 : Reg alloc NYI"
+    | Load(dest, access) ->
+       let dada = match find_alloc dest with
+        | Reg r   -> failwith "AllocatedToMips 102 : Reg alloc NYI"
         | Stack o -> load_value t1 (Identifier(dest))
       in
       let array_addr , i = access in
@@ -112,7 +112,7 @@ let generate_main p =
       add t0 t0 t1 @@ (* à ce moment, t0 contient offset de l'addresse de t[i] *)
       lw t0 0 t0      @@
       dada            @@
-      sw t0 0 t1 *)
+      sw t0 0 t1
 
       (* let array_addr, i = access in
       load_value t0 array_addr @@

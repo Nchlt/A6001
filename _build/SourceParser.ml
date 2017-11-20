@@ -116,7 +116,17 @@ and _menhir_state =
 
 # 118 "SourceParser.ml"
 
-let rec _menhir_goto_instruction : _menhir_env -> 'ttv_tail -> _menhir_state -> (SourceAst.instruction) -> 'ttv_return =
+let rec _menhir_reduce3 : _menhir_env -> 'ttv_tail * _menhir_state * (SourceAst.location) -> 'ttv_return =
+  fun _menhir_env _menhir_stack ->
+    let (_menhir_stack, _menhir_s, (loc : (SourceAst.location))) = _menhir_stack in
+    let _v : (SourceAst.expression) = 
+# 92 "SourceParser.mly"
+                                                    ( Location(loc)     )
+# 126 "SourceParser.ml"
+     in
+    _menhir_goto_expression _menhir_env _menhir_stack _menhir_s _v
+
+and _menhir_goto_instruction : _menhir_env -> 'ttv_tail -> _menhir_state -> (SourceAst.instruction) -> 'ttv_return =
   fun _menhir_env _menhir_stack _menhir_s _v ->
     let _menhir_stack = (_menhir_stack, _menhir_s, _v) in
     let _menhir_stack = Obj.magic _menhir_stack in
@@ -145,7 +155,7 @@ let rec _menhir_goto_instruction : _menhir_env -> 'ttv_tail -> _menhir_state -> 
         | WHILE ->
             _menhir_run17 _menhir_env (Obj.magic _menhir_stack) MenhirState69
         | END ->
-            _menhir_reduce21 _menhir_env (Obj.magic _menhir_stack) MenhirState69
+            _menhir_reduce20 _menhir_env (Obj.magic _menhir_stack) MenhirState69
         | _ ->
             assert (not _menhir_env._menhir_error);
             _menhir_env._menhir_error <- true;
@@ -180,23 +190,23 @@ and _menhir_run52 : _menhir_env -> 'ttv_tail -> _menhir_state -> 'ttv_return =
     | WHILE ->
         _menhir_run17 _menhir_env (Obj.magic _menhir_stack) MenhirState52
     | END ->
-        _menhir_reduce21 _menhir_env (Obj.magic _menhir_stack) MenhirState52
+        _menhir_reduce20 _menhir_env (Obj.magic _menhir_stack) MenhirState52
     | _ ->
         assert (not _menhir_env._menhir_error);
         _menhir_env._menhir_error <- true;
         _menhir_errorcase _menhir_env (Obj.magic _menhir_stack) MenhirState52
 
-and _menhir_reduce15 : _menhir_env -> ((('ttv_tail * _menhir_state * (SourceAst.expression)) * _menhir_state) * _menhir_state * (SourceAst.expression)) * _menhir_state -> 'ttv_return =
+and _menhir_reduce25 : _menhir_env -> ((('ttv_tail * _menhir_state * (SourceAst.expression)) * _menhir_state) * _menhir_state * (SourceAst.expression)) * _menhir_state -> 'ttv_return =
   fun _menhir_env _menhir_stack ->
     let ((((_menhir_stack, _menhir_s, (e1 : (SourceAst.expression))), _), _, (e2 : (SourceAst.expression))), _) = _menhir_stack in
     let _4 = () in
     let _2 = () in
-    let _v : (SourceAst.expression) = 
-# 97 "SourceParser.mly"
-                                                    ( Location( ArrayAccess(e1, e2) ) )
-# 198 "SourceParser.ml"
+    let _v : (SourceAst.location) = 
+# 109 "SourceParser.mly"
+            ( ArrayAccess(e1, e2) )
+# 208 "SourceParser.ml"
      in
-    _menhir_goto_expression _menhir_env _menhir_stack _menhir_s _v
+    _menhir_goto_location _menhir_env _menhir_stack _menhir_s _v
 
 and _menhir_run26 : _menhir_env -> 'ttv_tail * _menhir_state * (SourceAst.expression) -> _menhir_state -> 'ttv_return =
   fun _menhir_env _menhir_stack _menhir_s ->
@@ -427,7 +437,7 @@ and _menhir_goto_instructions : _menhir_env -> 'ttv_tail -> _menhir_state -> (So
             let _v : (SourceAst.block) = 
 # 87 "SourceParser.mly"
                                      ( is )
-# 431 "SourceParser.ml"
+# 441 "SourceParser.ml"
              in
             let _menhir_stack = (_menhir_stack, _menhir_s, _v) in
             (match _menhir_s with
@@ -463,7 +473,7 @@ and _menhir_goto_instructions : _menhir_env -> 'ttv_tail -> _menhir_state -> (So
                 let _v : (SourceAst.instruction) = 
 # 77 "SourceParser.mly"
                                                     ( If(e, b1, b2) )
-# 467 "SourceParser.ml"
+# 477 "SourceParser.ml"
                  in
                 _menhir_goto_instruction _menhir_env _menhir_stack _menhir_s _v
             | MenhirState51 ->
@@ -474,7 +484,7 @@ and _menhir_goto_instructions : _menhir_env -> 'ttv_tail -> _menhir_state -> (So
                 let _v : (SourceAst.instruction) = 
 # 76 "SourceParser.mly"
                                                     ( While(e, b)   )
-# 478 "SourceParser.ml"
+# 488 "SourceParser.ml"
                  in
                 _menhir_goto_instruction _menhir_env _menhir_stack _menhir_s _v
             | _ ->
@@ -493,7 +503,7 @@ and _menhir_goto_instructions : _menhir_env -> 'ttv_tail -> _menhir_state -> (So
         let _v : (SourceAst.block) = 
 # 71 "SourceParser.mly"
                                            ( i :: is )
-# 497 "SourceParser.ml"
+# 507 "SourceParser.ml"
          in
         _menhir_goto_instructions _menhir_env _menhir_stack _menhir_s _v
     | MenhirState16 ->
@@ -512,7 +522,7 @@ and _menhir_goto_instructions : _menhir_env -> 'ttv_tail -> _menhir_state -> (So
                 let (((_menhir_stack, (x : (
 # 12 "SourceParser.mly"
        (string)
-# 516 "SourceParser.ml"
+# 526 "SourceParser.ml"
                 ))), _, (vds : (SourceAst.identifier_info SourceAst.Symb_Tbl.t))), _, (is : (SourceAst.block))) = _menhir_stack in
                 let _10 = () in
                 let _9 = () in
@@ -524,7 +534,7 @@ and _menhir_goto_instructions : _menhir_env -> 'ttv_tail -> _menhir_state -> (So
                 let _v : (
 # 30 "SourceParser.mly"
       (SourceAst.main)
-# 528 "SourceParser.ml"
+# 538 "SourceParser.ml"
                 ) = 
 # 36 "SourceParser.mly"
                                                    (
@@ -537,14 +547,14 @@ and _menhir_goto_instructions : _menhir_env -> 'ttv_tail -> _menhir_state -> (So
     in
     let locals = Symb_Tbl.merge merge_vars init vds in
     {locals = locals; code=is} )
-# 541 "SourceParser.ml"
+# 551 "SourceParser.ml"
                  in
                 let _menhir_stack = Obj.magic _menhir_stack in
                 let _menhir_stack = Obj.magic _menhir_stack in
                 let (_1 : (
 # 30 "SourceParser.mly"
       (SourceAst.main)
-# 548 "SourceParser.ml"
+# 558 "SourceParser.ml"
                 )) = _v in
                 Obj.magic _1
             | _ ->
@@ -562,15 +572,47 @@ and _menhir_goto_instructions : _menhir_env -> 'ttv_tail -> _menhir_state -> (So
     | _ ->
         _menhir_fail ()
 
-and _menhir_reduce3 : _menhir_env -> 'ttv_tail * _menhir_state * (SourceAst.location) -> 'ttv_return =
-  fun _menhir_env _menhir_stack ->
-    let (_menhir_stack, _menhir_s, (loc : (SourceAst.location))) = _menhir_stack in
-    let _v : (SourceAst.expression) = 
-# 92 "SourceParser.mly"
-                                                    ( Location(loc)     )
-# 572 "SourceParser.ml"
-     in
-    _menhir_goto_expression _menhir_env _menhir_stack _menhir_s _v
+and _menhir_goto_location : _menhir_env -> 'ttv_tail -> _menhir_state -> (SourceAst.location) -> 'ttv_return =
+  fun _menhir_env _menhir_stack _menhir_s _v ->
+    let _menhir_stack = (_menhir_stack, _menhir_s, _v) in
+    match _menhir_s with
+    | MenhirState75 | MenhirState72 | MenhirState64 | MenhirState57 | MenhirState54 | MenhirState17 | MenhirState18 | MenhirState45 | MenhirState42 | MenhirState40 | MenhirState38 | MenhirState36 | MenhirState34 | MenhirState32 | MenhirState30 | MenhirState28 | MenhirState26 | MenhirState22 ->
+        let _menhir_stack = Obj.magic _menhir_stack in
+        _menhir_reduce3 _menhir_env (Obj.magic _menhir_stack)
+    | MenhirState16 | MenhirState69 | MenhirState52 ->
+        let _menhir_stack = Obj.magic _menhir_stack in
+        assert (not _menhir_env._menhir_error);
+        let _tok = _menhir_env._menhir_token in
+        (match _tok with
+        | SET ->
+            let _menhir_stack = Obj.magic _menhir_stack in
+            let _menhir_env = _menhir_discard _menhir_env in
+            let _tok = _menhir_env._menhir_token in
+            (match _tok with
+            | BEGIN ->
+                _menhir_run22 _menhir_env (Obj.magic _menhir_stack) MenhirState64
+            | CONST_BOOL _v ->
+                _menhir_run21 _menhir_env (Obj.magic _menhir_stack) MenhirState64 _v
+            | CONST_INT _v ->
+                _menhir_run20 _menhir_env (Obj.magic _menhir_stack) MenhirState64 _v
+            | IDENT _v ->
+                _menhir_run19 _menhir_env (Obj.magic _menhir_stack) MenhirState64 _v
+            | OPEN_BRACKET ->
+                _menhir_run18 _menhir_env (Obj.magic _menhir_stack) MenhirState64
+            | _ ->
+                assert (not _menhir_env._menhir_error);
+                _menhir_env._menhir_error <- true;
+                _menhir_errorcase _menhir_env (Obj.magic _menhir_stack) MenhirState64)
+        | AND | EQUAL | LE | LT | MINUS | NEQ | OPEN_BRACKET | OR | PLUS | STAR ->
+            _menhir_reduce3 _menhir_env (Obj.magic _menhir_stack)
+        | _ ->
+            assert (not _menhir_env._menhir_error);
+            _menhir_env._menhir_error <- true;
+            let _menhir_stack = Obj.magic _menhir_stack in
+            let (_menhir_stack, _menhir_s, _) = _menhir_stack in
+            _menhir_errorcase _menhir_env (Obj.magic _menhir_stack) _menhir_s)
+    | _ ->
+        _menhir_fail ()
 
 and _menhir_goto_literal : _menhir_env -> 'ttv_tail -> _menhir_state -> (SourceAst.literal) -> 'ttv_return =
   fun _menhir_env _menhir_stack _menhir_s _v ->
@@ -580,7 +622,7 @@ and _menhir_goto_literal : _menhir_env -> 'ttv_tail -> _menhir_state -> (SourceA
     let _v : (SourceAst.expression) = 
 # 91 "SourceParser.mly"
                                                     ( Literal(lit)      )
-# 584 "SourceParser.ml"
+# 626 "SourceParser.ml"
      in
     _menhir_goto_expression _menhir_env _menhir_stack _menhir_s _v
 
@@ -606,7 +648,7 @@ and _menhir_goto_expression : _menhir_env -> 'ttv_tail -> _menhir_state -> (Sour
             let _v : (SourceAst.expression) = 
 # 93 "SourceParser.mly"
                                                     ( e                 )
-# 610 "SourceParser.ml"
+# 652 "SourceParser.ml"
              in
             _menhir_goto_expression _menhir_env _menhir_stack _menhir_s _v
         | EQUAL ->
@@ -647,13 +689,13 @@ and _menhir_goto_expression : _menhir_env -> 'ttv_tail -> _menhir_state -> (Sour
               
 # 115 "SourceParser.mly"
          ( Mult )
-# 651 "SourceParser.ml"
+# 693 "SourceParser.ml"
               
             in
             
 # 94 "SourceParser.mly"
                                                     ( Binop(op, e1, e2) )
-# 657 "SourceParser.ml"
+# 699 "SourceParser.ml"
              in
             _menhir_goto_expression _menhir_env _menhir_stack _menhir_s _v
         | _ ->
@@ -672,7 +714,7 @@ and _menhir_goto_expression : _menhir_env -> 'ttv_tail -> _menhir_state -> (Sour
             let _menhir_s = MenhirState29 in
             let _menhir_stack = (_menhir_stack, _menhir_s) in
             let _menhir_env = _menhir_discard _menhir_env in
-            _menhir_reduce15 _menhir_env (Obj.magic _menhir_stack)
+            _menhir_reduce25 _menhir_env (Obj.magic _menhir_stack)
         | EQUAL ->
             _menhir_run42 _menhir_env (Obj.magic _menhir_stack) MenhirState29
         | LE ->
@@ -713,13 +755,13 @@ and _menhir_goto_expression : _menhir_env -> 'ttv_tail -> _menhir_state -> (Sour
               
 # 113 "SourceParser.mly"
          ( Add  )
-# 717 "SourceParser.ml"
+# 759 "SourceParser.ml"
               
             in
             
 # 94 "SourceParser.mly"
                                                     ( Binop(op, e1, e2) )
-# 723 "SourceParser.ml"
+# 765 "SourceParser.ml"
              in
             _menhir_goto_expression _menhir_env _menhir_stack _menhir_s _v
         | _ ->
@@ -756,13 +798,13 @@ and _menhir_goto_expression : _menhir_env -> 'ttv_tail -> _menhir_state -> (Sour
               
 # 121 "SourceParser.mly"
          ( Or   )
-# 760 "SourceParser.ml"
+# 802 "SourceParser.ml"
               
             in
             
 # 94 "SourceParser.mly"
                                                     ( Binop(op, e1, e2) )
-# 766 "SourceParser.ml"
+# 808 "SourceParser.ml"
              in
             _menhir_goto_expression _menhir_env _menhir_stack _menhir_s _v
         | _ ->
@@ -791,13 +833,13 @@ and _menhir_goto_expression : _menhir_env -> 'ttv_tail -> _menhir_state -> (Sour
               
 # 117 "SourceParser.mly"
          ( Neq  )
-# 795 "SourceParser.ml"
+# 837 "SourceParser.ml"
               
             in
             
 # 94 "SourceParser.mly"
                                                     ( Binop(op, e1, e2) )
-# 801 "SourceParser.ml"
+# 843 "SourceParser.ml"
              in
             _menhir_goto_expression _menhir_env _menhir_stack _menhir_s _v
         | _ ->
@@ -822,13 +864,13 @@ and _menhir_goto_expression : _menhir_env -> 'ttv_tail -> _menhir_state -> (Sour
               
 # 114 "SourceParser.mly"
          ( Sub  )
-# 826 "SourceParser.ml"
+# 868 "SourceParser.ml"
               
             in
             
 # 94 "SourceParser.mly"
                                                     ( Binop(op, e1, e2) )
-# 832 "SourceParser.ml"
+# 874 "SourceParser.ml"
              in
             _menhir_goto_expression _menhir_env _menhir_stack _menhir_s _v
         | _ ->
@@ -857,13 +899,13 @@ and _menhir_goto_expression : _menhir_env -> 'ttv_tail -> _menhir_state -> (Sour
               
 # 118 "SourceParser.mly"
          ( Lt   )
-# 861 "SourceParser.ml"
+# 903 "SourceParser.ml"
               
             in
             
 # 94 "SourceParser.mly"
                                                     ( Binop(op, e1, e2) )
-# 867 "SourceParser.ml"
+# 909 "SourceParser.ml"
              in
             _menhir_goto_expression _menhir_env _menhir_stack _menhir_s _v
         | _ ->
@@ -892,13 +934,13 @@ and _menhir_goto_expression : _menhir_env -> 'ttv_tail -> _menhir_state -> (Sour
               
 # 119 "SourceParser.mly"
          ( Le   )
-# 896 "SourceParser.ml"
+# 938 "SourceParser.ml"
               
             in
             
 # 94 "SourceParser.mly"
                                                     ( Binop(op, e1, e2) )
-# 902 "SourceParser.ml"
+# 944 "SourceParser.ml"
              in
             _menhir_goto_expression _menhir_env _menhir_stack _menhir_s _v
         | _ ->
@@ -927,13 +969,13 @@ and _menhir_goto_expression : _menhir_env -> 'ttv_tail -> _menhir_state -> (Sour
               
 # 116 "SourceParser.mly"
          ( Eq   )
-# 931 "SourceParser.ml"
+# 973 "SourceParser.ml"
               
             in
             
 # 94 "SourceParser.mly"
                                                     ( Binop(op, e1, e2) )
-# 937 "SourceParser.ml"
+# 979 "SourceParser.ml"
              in
             _menhir_goto_expression _menhir_env _menhir_stack _menhir_s _v
         | _ ->
@@ -970,13 +1012,13 @@ and _menhir_goto_expression : _menhir_env -> 'ttv_tail -> _menhir_state -> (Sour
               
 # 120 "SourceParser.mly"
          ( And  )
-# 974 "SourceParser.ml"
+# 1016 "SourceParser.ml"
               
             in
             
 # 94 "SourceParser.mly"
                                                     ( Binop(op, e1, e2) )
-# 980 "SourceParser.ml"
+# 1022 "SourceParser.ml"
              in
             _menhir_goto_expression _menhir_env _menhir_stack _menhir_s _v
         | _ ->
@@ -1079,7 +1121,7 @@ and _menhir_goto_expression : _menhir_env -> 'ttv_tail -> _menhir_state -> (Sour
             let _v : (SourceAst.instruction) = 
 # 78 "SourceParser.mly"
                                                     ( Print(e)      )
-# 1083 "SourceParser.ml"
+# 1125 "SourceParser.ml"
              in
             _menhir_goto_instruction _menhir_env _menhir_stack _menhir_s _v
         | EQUAL ->
@@ -1178,7 +1220,7 @@ and _menhir_goto_expression : _menhir_env -> 'ttv_tail -> _menhir_state -> (Sour
             let _v : (SourceAst.instruction) = 
 # 75 "SourceParser.mly"
                                                     ( Set(l, e)     )
-# 1182 "SourceParser.ml"
+# 1224 "SourceParser.ml"
              in
             _menhir_goto_instruction _menhir_env _menhir_stack _menhir_s _v
         | _ ->
@@ -1267,7 +1309,7 @@ and _menhir_goto_expression : _menhir_env -> 'ttv_tail -> _menhir_state -> (Sour
                     _menhir_env._menhir_error <- true;
                     _menhir_errorcase _menhir_env (Obj.magic _menhir_stack) MenhirState75)
             | AND | EQUAL | LE | LT | MINUS | NEQ | OPEN_BRACKET | OR | PLUS | STAR ->
-                _menhir_reduce15 _menhir_env (Obj.magic _menhir_stack)
+                _menhir_reduce25 _menhir_env (Obj.magic _menhir_stack)
             | _ ->
                 assert (not _menhir_env._menhir_error);
                 _menhir_env._menhir_error <- true;
@@ -1333,7 +1375,7 @@ and _menhir_goto_expression : _menhir_env -> 'ttv_tail -> _menhir_state -> (Sour
     let loc = ArrayAccess(e1, e2) in
     Set(loc, e3)
 )
-# 1337 "SourceParser.ml"
+# 1379 "SourceParser.ml"
              in
             _menhir_goto_instruction _menhir_env _menhir_stack _menhir_s _v
         | _ ->
@@ -1348,12 +1390,12 @@ and _menhir_fail : unit -> 'a =
     Printf.fprintf Pervasives.stderr "Internal failure -- please contact the parser generator's developers.\n%!";
     assert false
 
-and _menhir_reduce21 : _menhir_env -> 'ttv_tail -> _menhir_state -> 'ttv_return =
+and _menhir_reduce20 : _menhir_env -> 'ttv_tail -> _menhir_state -> 'ttv_return =
   fun _menhir_env _menhir_stack _menhir_s ->
     let _v : (SourceAst.block) = 
 # 70 "SourceParser.mly"
                                            ( []      )
-# 1357 "SourceParser.ml"
+# 1399 "SourceParser.ml"
      in
     _menhir_goto_instructions _menhir_env _menhir_stack _menhir_s _v
 
@@ -1455,7 +1497,7 @@ and _menhir_run57 : _menhir_env -> 'ttv_tail -> _menhir_state -> 'ttv_return =
 and _menhir_run19 : _menhir_env -> 'ttv_tail -> _menhir_state -> (
 # 12 "SourceParser.mly"
        (string)
-# 1459 "SourceParser.ml"
+# 1501 "SourceParser.ml"
 ) -> 'ttv_return =
   fun _menhir_env _menhir_stack _menhir_s _v ->
     let _menhir_env = _menhir_discard _menhir_env in
@@ -1463,57 +1505,19 @@ and _menhir_run19 : _menhir_env -> 'ttv_tail -> _menhir_state -> (
     let (id : (
 # 12 "SourceParser.mly"
        (string)
-# 1467 "SourceParser.ml"
+# 1509 "SourceParser.ml"
     )) = _v in
     let _v : (SourceAst.location) = 
 # 107 "SourceParser.mly"
             ( Identifier id       )
-# 1472 "SourceParser.ml"
+# 1514 "SourceParser.ml"
      in
-    let _menhir_stack = (_menhir_stack, _menhir_s, _v) in
-    match _menhir_s with
-    | MenhirState75 | MenhirState72 | MenhirState64 | MenhirState57 | MenhirState54 | MenhirState17 | MenhirState18 | MenhirState45 | MenhirState42 | MenhirState40 | MenhirState38 | MenhirState36 | MenhirState34 | MenhirState32 | MenhirState30 | MenhirState28 | MenhirState26 | MenhirState22 ->
-        let _menhir_stack = Obj.magic _menhir_stack in
-        _menhir_reduce3 _menhir_env (Obj.magic _menhir_stack)
-    | MenhirState16 | MenhirState69 | MenhirState52 ->
-        let _menhir_stack = Obj.magic _menhir_stack in
-        assert (not _menhir_env._menhir_error);
-        let _tok = _menhir_env._menhir_token in
-        (match _tok with
-        | SET ->
-            let _menhir_stack = Obj.magic _menhir_stack in
-            let _menhir_env = _menhir_discard _menhir_env in
-            let _tok = _menhir_env._menhir_token in
-            (match _tok with
-            | BEGIN ->
-                _menhir_run22 _menhir_env (Obj.magic _menhir_stack) MenhirState64
-            | CONST_BOOL _v ->
-                _menhir_run21 _menhir_env (Obj.magic _menhir_stack) MenhirState64 _v
-            | CONST_INT _v ->
-                _menhir_run20 _menhir_env (Obj.magic _menhir_stack) MenhirState64 _v
-            | IDENT _v ->
-                _menhir_run19 _menhir_env (Obj.magic _menhir_stack) MenhirState64 _v
-            | OPEN_BRACKET ->
-                _menhir_run18 _menhir_env (Obj.magic _menhir_stack) MenhirState64
-            | _ ->
-                assert (not _menhir_env._menhir_error);
-                _menhir_env._menhir_error <- true;
-                _menhir_errorcase _menhir_env (Obj.magic _menhir_stack) MenhirState64)
-        | AND | EQUAL | LE | LT | MINUS | NEQ | OPEN_BRACKET | OR | PLUS | STAR ->
-            _menhir_reduce3 _menhir_env (Obj.magic _menhir_stack)
-        | _ ->
-            assert (not _menhir_env._menhir_error);
-            _menhir_env._menhir_error <- true;
-            let _menhir_stack = Obj.magic _menhir_stack in
-            let (_menhir_stack, _menhir_s, _) = _menhir_stack in
-            _menhir_errorcase _menhir_env (Obj.magic _menhir_stack) _menhir_s)
-    | _ ->
-        _menhir_fail ()
+    _menhir_goto_location _menhir_env _menhir_stack _menhir_s _v
 
 and _menhir_run20 : _menhir_env -> 'ttv_tail -> _menhir_state -> (
 # 7 "SourceParser.mly"
        (int)
-# 1517 "SourceParser.ml"
+# 1521 "SourceParser.ml"
 ) -> 'ttv_return =
   fun _menhir_env _menhir_stack _menhir_s _v ->
     let _menhir_env = _menhir_discard _menhir_env in
@@ -1521,19 +1525,19 @@ and _menhir_run20 : _menhir_env -> 'ttv_tail -> _menhir_state -> (
     let (i : (
 # 7 "SourceParser.mly"
        (int)
-# 1525 "SourceParser.ml"
+# 1529 "SourceParser.ml"
     )) = _v in
     let _v : (SourceAst.literal) = 
 # 102 "SourceParser.mly"
                 ( Int i  )
-# 1530 "SourceParser.ml"
+# 1534 "SourceParser.ml"
      in
     _menhir_goto_literal _menhir_env _menhir_stack _menhir_s _v
 
 and _menhir_run21 : _menhir_env -> 'ttv_tail -> _menhir_state -> (
 # 9 "SourceParser.mly"
        (bool)
-# 1537 "SourceParser.ml"
+# 1541 "SourceParser.ml"
 ) -> 'ttv_return =
   fun _menhir_env _menhir_stack _menhir_s _v ->
     let _menhir_env = _menhir_discard _menhir_env in
@@ -1541,12 +1545,12 @@ and _menhir_run21 : _menhir_env -> 'ttv_tail -> _menhir_state -> (
     let (b : (
 # 9 "SourceParser.mly"
        (bool)
-# 1545 "SourceParser.ml"
+# 1549 "SourceParser.ml"
     )) = _v in
     let _v : (SourceAst.literal) = 
 # 103 "SourceParser.mly"
                 ( Bool b )
-# 1550 "SourceParser.ml"
+# 1554 "SourceParser.ml"
      in
     _menhir_goto_literal _menhir_env _menhir_stack _menhir_s _v
 
@@ -1584,7 +1588,7 @@ and _menhir_goto_typ : _menhir_env -> 'ttv_tail -> _menhir_state -> (SourceAst.t
         let _v : (SourceAst.typ) = 
 # 66 "SourceParser.mly"
                                       ( TypArray(t) )
-# 1588 "SourceParser.ml"
+# 1592 "SourceParser.ml"
          in
         _menhir_goto_typ _menhir_env _menhir_stack _menhir_s _v
     | MenhirState7 ->
@@ -1599,13 +1603,13 @@ and _menhir_goto_typ : _menhir_env -> 'ttv_tail -> _menhir_state -> (SourceAst.t
             let (id : (
 # 12 "SourceParser.mly"
        (string)
-# 1603 "SourceParser.ml"
+# 1607 "SourceParser.ml"
             )) = _v in
             let (_menhir_stack, _menhir_s, (t : (SourceAst.typ))) = _menhir_stack in
             let _v : (SourceAst.Symb_Tbl.key * SourceAst.typ) = 
 # 60 "SourceParser.mly"
                    ( (id, t) )
-# 1609 "SourceParser.ml"
+# 1613 "SourceParser.ml"
              in
             let _menhir_stack = Obj.magic _menhir_stack in
             let _menhir_stack = Obj.magic _menhir_stack in
@@ -1615,7 +1619,7 @@ and _menhir_goto_typ : _menhir_env -> 'ttv_tail -> _menhir_state -> (SourceAst.t
             let _v : (SourceAst.Symb_Tbl.key * SourceAst.typ) = 
 # 56 "SourceParser.mly"
                         ( tid )
-# 1619 "SourceParser.ml"
+# 1623 "SourceParser.ml"
              in
             let _menhir_stack = (_menhir_stack, _menhir_s, _v) in
             let _menhir_stack = Obj.magic _menhir_stack in
@@ -1630,7 +1634,7 @@ and _menhir_goto_typ : _menhir_env -> 'ttv_tail -> _menhir_state -> (SourceAst.t
                 | VAR ->
                     _menhir_run7 _menhir_env (Obj.magic _menhir_stack) MenhirState82
                 | BEGIN | CONST_BOOL _ | CONST_INT _ | END | IDENT _ | IF | OPEN_BRACKET | PRINT | WHILE ->
-                    _menhir_reduce33 _menhir_env (Obj.magic _menhir_stack) MenhirState82
+                    _menhir_reduce32 _menhir_env (Obj.magic _menhir_stack) MenhirState82
                 | _ ->
                     assert (not _menhir_env._menhir_error);
                     _menhir_env._menhir_error <- true;
@@ -1656,7 +1660,7 @@ and _menhir_goto_typ : _menhir_env -> 'ttv_tail -> _menhir_state -> (SourceAst.t
         let _v : (SourceAst.expression) = 
 # 95 "SourceParser.mly"
                                                     ( NewArray(e, t)    )
-# 1660 "SourceParser.ml"
+# 1664 "SourceParser.ml"
          in
         _menhir_goto_expression _menhir_env _menhir_stack _menhir_s _v
     | _ ->
@@ -1688,7 +1692,7 @@ and _menhir_goto_var_decls : _menhir_env -> 'ttv_tail -> _menhir_state -> (Sourc
         | WHILE ->
             _menhir_run17 _menhir_env (Obj.magic _menhir_stack) MenhirState16
         | END ->
-            _menhir_reduce21 _menhir_env (Obj.magic _menhir_stack) MenhirState16
+            _menhir_reduce20 _menhir_env (Obj.magic _menhir_stack) MenhirState16
         | _ ->
             assert (not _menhir_env._menhir_error);
             _menhir_env._menhir_error <- true;
@@ -1703,7 +1707,7 @@ and _menhir_goto_var_decls : _menhir_env -> 'ttv_tail -> _menhir_state -> (Sourc
                                    ( let (id, t) = vd in
 				     let info = { typ=t; kind=Local } in
 				     Symb_Tbl.add id info vds )
-# 1707 "SourceParser.ml"
+# 1711 "SourceParser.ml"
          in
         _menhir_goto_var_decls _menhir_env _menhir_stack _menhir_s _v
     | _ ->
@@ -1745,7 +1749,7 @@ and _menhir_run10 : _menhir_env -> 'ttv_tail -> _menhir_state -> 'ttv_return =
     let _v : (SourceAst.typ) = 
 # 64 "SourceParser.mly"
                                       ( TypInteger   )
-# 1749 "SourceParser.ml"
+# 1753 "SourceParser.ml"
      in
     _menhir_goto_typ _menhir_env _menhir_stack _menhir_s _v
 
@@ -1757,7 +1761,7 @@ and _menhir_run11 : _menhir_env -> 'ttv_tail -> _menhir_state -> 'ttv_return =
     let _v : (SourceAst.typ) = 
 # 65 "SourceParser.mly"
                                       ( TypBoolean   )
-# 1761 "SourceParser.ml"
+# 1765 "SourceParser.ml"
      in
     _menhir_goto_typ _menhir_env _menhir_stack _menhir_s _v
 
@@ -1952,12 +1956,12 @@ and _menhir_errorcase : _menhir_env -> 'ttv_tail -> _menhir_state -> 'ttv_return
         let _menhir_stack = Obj.magic _menhir_stack in
         raise _eRR
 
-and _menhir_reduce33 : _menhir_env -> 'ttv_tail -> _menhir_state -> 'ttv_return =
+and _menhir_reduce32 : _menhir_env -> 'ttv_tail -> _menhir_state -> 'ttv_return =
   fun _menhir_env _menhir_stack _menhir_s ->
     let _v : (SourceAst.identifier_info SourceAst.Symb_Tbl.t) = 
 # 49 "SourceParser.mly"
                                    ( Symb_Tbl.empty                            )
-# 1961 "SourceParser.ml"
+# 1965 "SourceParser.ml"
      in
     _menhir_goto_var_decls _menhir_env _menhir_stack _menhir_s _v
 
@@ -1993,7 +1997,7 @@ and _menhir_discard : _menhir_env -> _menhir_env =
 and main : (Lexing.lexbuf -> token) -> Lexing.lexbuf -> (
 # 30 "SourceParser.mly"
       (SourceAst.main)
-# 1997 "SourceParser.ml"
+# 2001 "SourceParser.ml"
 ) =
   fun lexer lexbuf ->
     let _menhir_env = let _tok = Obj.magic () in
@@ -2041,7 +2045,7 @@ and main : (Lexing.lexbuf -> token) -> Lexing.lexbuf -> (
                             | VAR ->
                                 _menhir_run7 _menhir_env (Obj.magic _menhir_stack) MenhirState6
                             | BEGIN | CONST_BOOL _ | CONST_INT _ | END | IDENT _ | IF | OPEN_BRACKET | PRINT | WHILE ->
-                                _menhir_reduce33 _menhir_env (Obj.magic _menhir_stack) MenhirState6
+                                _menhir_reduce32 _menhir_env (Obj.magic _menhir_stack) MenhirState6
                             | _ ->
                                 assert (not _menhir_env._menhir_error);
                                 _menhir_env._menhir_error <- true;
@@ -2081,4 +2085,4 @@ and main : (Lexing.lexbuf -> token) -> Lexing.lexbuf -> (
   
 
 
-# 2085 "SourceParser.ml"
+# 2089 "SourceParser.ml"

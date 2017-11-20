@@ -35,11 +35,18 @@ let flatten_main p =
   (* flatten_instruction: S.instruction -> T.instruction list *)
   and flatten_instruction = function
     (* Ajout *)
+    (*ex dada := tab[2] *)
+    |S.Set(Identifier id, Location(ArrayAccess(e1, e2))) ->
+      let ce1, ve1 = flatten_expression e1 in
+      let ce2, ve2 = flatten_expression e2 in
+      let access = ve1, ve2                in
+      ce1 @ ce2 @ [T.Load(id, access)]
+
     | S.Set(ArrayAccess(e1, e2), e3) ->
       let ce1, ve1 = flatten_expression e1 in
       let ce2, ve2 = flatten_expression e2 in
       let ce3, ve3 = flatten_expression e3 in
-      let access = ve1, ve2 in
+      let access = ve1, ve2                in
       ce1 @ ce2 @ ce3 @ [T.Store(access, ve3)]
 
     | S.Set(Identifier id, e) ->
@@ -77,8 +84,11 @@ let flatten_main p =
       | Location(ArrayAccess(e1, e2)) ->
         let ce1, ve1 = flatten_expression e1 in
         let ce2, ve2 = flatten_expression e2 in
-        let res = new_tmp() in
-        (ce1 @ ce2, T.Identifier(res))
+        let res1 = new_tmp() in
+        let res2 = new_tmp() in
+
+        ce1 @ ce2 , T.Identifier(res1)
+
       | Binop(op, e1, e2) ->
 	let ce1, ve1 = flatten_expression e1 in
 	let ce2, ve2 = flatten_expression e2 in
