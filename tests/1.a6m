@@ -5,6 +5,6 @@ main(integer x) (
   tab := [10]integer;
   tab[2] := 37;
   dada := tab[2];
-
+  print(dada);
 
 )

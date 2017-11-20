@@ -100,7 +100,7 @@ let generate_main p =
     | Load(dest, access) ->
        let dada = match find_alloc dest with
         | Reg r   -> failwith "AllocatedToMips 102 : Reg alloc NYI"
-        | Stack o -> lw t1 o fp
+        | Stack o -> sw t0 o fp
       in
       let array_addr , i = access in
 
@@ -111,8 +111,8 @@ let generate_main p =
       load_value t1 array_addr@@
       add t0 t0 t1 @@ (* à ce moment, t0 contient offset de l'addresse de t[i] *)
       lw t0 0 t0      @@
-      dada            @@
-      sw t0 0 t1
+      dada            
+
 
       (* let array_addr, i = access in
       load_value t0 array_addr @@

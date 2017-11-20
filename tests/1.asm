@@ -35,8 +35,11 @@
 	lw $t1, -12($fp)
 	add $t0, $t0, $t1
 	lw $t0, 0($t0)
-	lw $t1, -8($fp)
-	sw $t0, 0($t1)
+	sw $t0, -8($fp)
+#_main_4
+	lw $a0, -8($fp)
+	li $v0, 11
+	syscall
 	li $v0, 10
 	syscall
 atoi:

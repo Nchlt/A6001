@@ -1,0 +1,19 @@
+main(integer x) (
+      var []integer ascii_int;
+      var integer i;
+
+      ascii_int := [10]integer;
+      ascii_int[0] := 48;
+      ascii_int[1] := 49;
+      ascii_int[2] := 50;
+      ascii_int[3] := 51;
+      ascii_int[4] := 52;
+      ascii_int[5] := 53;
+      ascii_int[6] := 54;
+      ascii_int[7] := 55;
+      ascii_int[8] := 56;
+      ascii_int[9] := 57;
+
+      print(ascii_int[5]);
+
+    )
