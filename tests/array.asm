@@ -18,46 +18,6 @@
 #_main_1
 	lw $t0, -4($fp)
 	sw $t0, -12($fp)
-#_main_2
-	li $t0, 2
-	li $t1, 4
-	mul $t0, $t0, $t1
-	addi $t0, $t0, 4
-	lw $t1, -12($fp)
-	add $t0, $t0, $t1
-	li $t1, 3
-	sw $t1, 0($t0)
-#_main_3
-	li $t0, 1
-	li $t1, 4
-	mul $t0, $t0, $t1
-	addi $t0, $t0, 4
-	lw $t1, -12($fp)
-	add $t0, $t0, $t1
-	li $t1, 37
-	sw $t1, 0($t0)
-#_main_4
-	li $t0, 0
-	li $t1, 4
-	mul $t0, $t0, $t1
-	addi $t0, $t0, 4
-	lw $t1, -12($fp)
-	add $t0, $t0, $t1
-	li $t1, 1
-	sw $t1, 0($t0)
-#_main_5
-	li $t0, 4
-	li $t1, 1
-	mul $t0, $t0, $t1
-	addi $t0, $t0, 4
-	lw $t1, -12($fp)
-	add $t0, $t0, $t1
-	lw $t0, 0($t0)
-	sw $t0, -8($fp)
-#_main_6
-	lw $a0, -8($fp)
-	li $v0, 11
-	syscall
 	li $v0, 10
 	syscall
 atoi:
