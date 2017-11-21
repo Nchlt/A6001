@@ -10,7 +10,7 @@
 %token AND OR
 %token EQUAL NEQ LT LE EQUAL_STRUCT
 %token <string> IDENT
-%token BEGIN END OPEN_BRACKET CLOSE_BRACKET
+%token BEGIN END OPEN_BRACKET CLOSE_BRACKET OPEN_CBRACKET CLOSE_CBRACKET
 %token IF THEN ELSE
 %token WHILE FOR TO
 %token SEMI
@@ -71,6 +71,12 @@ instructions:
 | i=instruction; SEMI; is=instructions     { i :: is }
 ;
 
+curly_array:
+| OPEN_CBRACKET; l=separated_nonempty_list(SEMI, CONST_INT ); CLOSE_CBRACKET;SEMI
+                                           { l }
+
+
+
 instruction:
 | l=location; SET; e=expression                     { Set(l, e)     }
 | WHILE; e=expression; b=block                      { While(e, b)   }
@@ -90,6 +96,10 @@ ins=instructions; END {
   Set(l, e);
   While(cond, new_instr)
 
+}
+
+| l=location; SET; ca=curly_array {
+  SetArray(l, ca)
 }
 
 
