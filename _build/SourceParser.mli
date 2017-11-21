@@ -4,6 +4,7 @@
 type token = 
   | WHILE
   | VAR
+  | TO
   | THEN
   | STAR
   | SET
@@ -20,6 +21,8 @@ type token =
   | INT
   | IF
   | IDENT of (string)
+  | FOR
+  | EQUAL_STRUCT
   | EQUAL
   | EOF
   | END

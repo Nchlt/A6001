@@ -1,0 +1,19 @@
+main(integer x) (
+      var []integer tab;
+      var integer i;
+      var integer res;
+      tab := [11]integer;
+
+      tab[0] := 0;
+      tab[1] := 1;
+
+      i:=2;
+      while(i <= 11) (
+        tab[i] := tab[i-1] + tab[i-2];
+        i := i + 1;
+      );
+
+      res := tab[10];
+      print(res);
+
+    )

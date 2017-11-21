@@ -1,6 +1,7 @@
 main(integer x) (
       var []integer ascii_int;
       var integer i;
+      var integer j;
 
       ascii_int := [10]integer;
       ascii_int[0] := 48;
@@ -14,6 +15,11 @@ main(integer x) (
       ascii_int[8] := 56;
       ascii_int[9] := 57;
 
-      print(ascii_int[5]);
+      i := 0;
+      while(i <= 10) (
+        j := ascii_int[i];
+        i := i + 1;
+        print(j);
+      );
 
     )

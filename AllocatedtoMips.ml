@@ -15,6 +15,7 @@ let generate_main p =
     | []       -> Nop
     | (l,i)::b -> comment l @@ generate_instr i @@ generate_block b
 
+
   (* Un appel [load_literal r v] génère du code qui place la valeur
      immédiate [v] dans le registre [r]. *)
   and load_literal r : AllocatedAst.literal -> 'a Mips.asm = function
@@ -28,6 +29,7 @@ let generate_main p =
     | Identifier(id) -> (match find_alloc id with
 	| Reg r'  -> move r r'
 	| Stack o -> lw r o ~$fp)
+
 
   (* Variante optimisée de [load_value], qui place la valeur dans le
      registre [r] sauf si cette valeur est déjà stockée dans un
@@ -46,6 +48,8 @@ let generate_main p =
   and load_second_operand v = load_operand ~$t1 v
 
   and generate_instr : AllocatedAst.instruction -> 'a Mips.asm = function
+
+
     | Value(dest, v) ->
       (match find_alloc dest with
 	| Reg r   -> load_value r v
@@ -108,18 +112,21 @@ let generate_main p =
       load_value t1 i @@
       mul t0 t0 t1    @@
       addi t0 t0 4    @@
+
+      (* Vérification pour l'extension 3.1: on saute à la fin de programme si on est en dehors
+      des bornes du tableau. *)
+      blez t0 "atoi_error"      @@ (* on ne veut pas d'index négatifs *)
+      load_value t1 array_addr  @@
+      lw t1 0 t1                @@ (* On récupère la taille du tableau *)
+      blt t1 t0 "atoi_error"    @@    (* Si la "range" du tableau est plus petite que
+      l'adresse dans le tableau alors on arrête *)
+
       load_value t1 array_addr@@
       add t0 t0 t1 @@ (* à ce moment, t0 contient offset de l'addresse de t[i] *)
       lw t0 0 t0      @@
-      dada            
+      dada
 
 
-      (* let array_addr, i = access in
-      load_value t0 array_addr @@
-      load_value t1 i @@
-      li t2 -4 @@
-      mul t1 t1 t2 @@
-      add t0 t0 t1  *)
 
     | Store(access, value) ->
       let array_addr, i = access in (* ce sont des values *)
@@ -127,10 +134,21 @@ let generate_main p =
       li t1 4         @@
       mul t0 t0 t1    @@
       addi t0 t0 4    @@ (* t0 contient maintenant l'adresse t[i] dans laquelle on
-      veut écrire*)
-      load_value t1 array_addr @@
-      add t0 t0 t1 @@
-      load_value t1 value @@
+      veut écrire offset par rapport à l'adresse de début du tableau*)
+
+
+      (* Vérification pour l'extension 3.1: on saute à la fin de programme si on est en dehors
+      des bornes du tableau. *)
+      blez t0 "atoi_error"      @@ (* on ne veut pas d'index négatifs *)
+      load_value t1 array_addr  @@
+      lw t1 0 t1                @@ (* On récupère la taille du tableau *)
+      blt t1 t0 "atoi_error"    @@    (* Si la "range" du tableau est plus petite que
+      l'adresse dans le tableau alors on arrête *)
+
+
+      load_value t1 array_addr  @@
+      add t0 t0 t1              @@ (*L'adresse on on veut store*)
+      load_value t1 value       @@
       sw t1 0 t0
 
 

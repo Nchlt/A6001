@@ -8,11 +8,11 @@
 %token PLUS MINUS STAR
 %token <bool> CONST_BOOL
 %token AND OR
-%token EQUAL NEQ LT LE
+%token EQUAL NEQ LT LE EQUAL_STRUCT
 %token <string> IDENT
 %token BEGIN END OPEN_BRACKET CLOSE_BRACKET
 %token IF THEN ELSE
-%token WHILE
+%token WHILE FOR TO
 %token SEMI
 %token SET
 %token VAR
@@ -80,6 +80,18 @@ instruction:
     let loc = ArrayAccess(e1, e2) in
     Set(loc, e3)
 }
+| FOR; BEGIN; l=location; EQUAL_STRUCT; e=expression; TO; borne_sup=expression; END; BEGIN;
+ins=instructions; END {
+  let cond = Binop(Lt, Location(l), borne_sup) in
+  let incr = Binop(Add, Location(l), Literal(Int(1))) in
+  let incr_i = Set(l, incr) in
+  let new_instr = [incr_i] @ ins in
+
+  Set(l, e);
+  While(cond, new_instr)
+
+}
+
 
 ;
 

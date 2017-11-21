@@ -4,7 +4,7 @@
 	lw $a0, 0($a1)
 	jal atoi
 	sw $v0, 0($fp)
-	addi $sp, $sp, -20
+	addi $sp, $sp, -24
 #_main_0
 	li $v0, 9
 	li $t1, 4
@@ -109,9 +109,51 @@
 	li $t1, 57
 	sw $t1, 0($t0)
 #_main_12
-	lw $a0, -4($fp)
+	li $t0, 0
+	sw $t0, -20($fp)
+#_main_13
+#While
+#_main_14
+	b _label_main_2
+#_label_main_1
+_label_main_1:
+#_main_16
+#Corps de boucle
+#_main_17
+	li $t0, 4
+	lw $t1, -20($fp)
+	mul $t0, $t0, $t1
+	addi $t0, $t0, 4
+	lw $t1, -16($fp)
+	add $t0, $t0, $t1
+	lw $t0, 0($t0)
+	sw $t0, -24($fp)
+#_main_18
+	lw $t0, -20($fp)
+	li $t1, 1
+	add $t0, $t0, $t1
+	sw $t0, -8($fp)
+#_main_19
+	lw $t0, -8($fp)
+	sw $t0, -20($fp)
+#_main_20
+	lw $a0, -24($fp)
 	li $v0, 11
 	syscall
+#_label_main_2
+_label_main_2:
+#_main_22
+#Test de boucle
+#_main_23
+	lw $t0, -20($fp)
+	li $t1, 10
+	sle $t0, $t0, $t1
+	sw $t0, -4($fp)
+#_main_24
+	lw $t0, -4($fp)
+	bnez $t0, _label_main_1
+#_main_25
+#Fin boucle
 	li $v0, 10
 	syscall
 atoi:

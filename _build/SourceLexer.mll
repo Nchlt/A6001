@@ -17,6 +17,8 @@
 	"print",    PRINT;
 	"main",     MAIN;
 	"var",      VAR;
+  "for",      FOR;
+  "to",       TO
       ] ;
     fun s ->
       try  Hashtbl.find h s
@@ -55,6 +57,8 @@ rule token = parse
       { EQUAL }
   | "!="
       { NEQ }
+  | "="
+      { EQUAL_STRUCT }
   | "<"
       { LT }
   | "<="
