@@ -72,7 +72,8 @@ instructions:
 ;
 
 curly_array:
-| OPEN_CBRACKET; l=separated_nonempty_list(SEMI, CONST_INT ); CLOSE_CBRACKET { l }
+| OPEN_CBRACKET; l=separated_nonempty_list(SEMI, CONST_INT ); CLOSE_CBRACKET;SEMI
+                                           { l }
 
 
 
