@@ -21,6 +21,7 @@ type token =
   | INT
   | IF
   | IDENT of (string)
+  | EQUAL_STRUCT
   | EQUAL
   | EOF
   | END
