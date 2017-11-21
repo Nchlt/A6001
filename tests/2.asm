@@ -23,6 +23,10 @@
 	li $t1, 4
 	mul $t0, $t0, $t1
 	addi $t0, $t0, 4
+	blez $t0, atoi_error
+	lw $t1, -16($fp)
+	lw $t1, 0($t1)
+	blt $t1, $t0, atoi_error
 	lw $t1, -16($fp)
 	add $t0, $t0, $t1
 	li $t1, 48
@@ -32,6 +36,10 @@
 	li $t1, 4
 	mul $t0, $t0, $t1
 	addi $t0, $t0, 4
+	blez $t0, atoi_error
+	lw $t1, -16($fp)
+	lw $t1, 0($t1)
+	blt $t1, $t0, atoi_error
 	lw $t1, -16($fp)
 	add $t0, $t0, $t1
 	li $t1, 49
@@ -41,6 +49,10 @@
 	li $t1, 4
 	mul $t0, $t0, $t1
 	addi $t0, $t0, 4
+	blez $t0, atoi_error
+	lw $t1, -16($fp)
+	lw $t1, 0($t1)
+	blt $t1, $t0, atoi_error
 	lw $t1, -16($fp)
 	add $t0, $t0, $t1
 	li $t1, 50
@@ -50,6 +62,10 @@
 	li $t1, 4
 	mul $t0, $t0, $t1
 	addi $t0, $t0, 4
+	blez $t0, atoi_error
+	lw $t1, -16($fp)
+	lw $t1, 0($t1)
+	blt $t1, $t0, atoi_error
 	lw $t1, -16($fp)
 	add $t0, $t0, $t1
 	li $t1, 51
@@ -59,6 +75,10 @@
 	li $t1, 4
 	mul $t0, $t0, $t1
 	addi $t0, $t0, 4
+	blez $t0, atoi_error
+	lw $t1, -16($fp)
+	lw $t1, 0($t1)
+	blt $t1, $t0, atoi_error
 	lw $t1, -16($fp)
 	add $t0, $t0, $t1
 	li $t1, 52
@@ -68,6 +88,10 @@
 	li $t1, 4
 	mul $t0, $t0, $t1
 	addi $t0, $t0, 4
+	blez $t0, atoi_error
+	lw $t1, -16($fp)
+	lw $t1, 0($t1)
+	blt $t1, $t0, atoi_error
 	lw $t1, -16($fp)
 	add $t0, $t0, $t1
 	li $t1, 53
@@ -77,6 +101,10 @@
 	li $t1, 4
 	mul $t0, $t0, $t1
 	addi $t0, $t0, 4
+	blez $t0, atoi_error
+	lw $t1, -16($fp)
+	lw $t1, 0($t1)
+	blt $t1, $t0, atoi_error
 	lw $t1, -16($fp)
 	add $t0, $t0, $t1
 	li $t1, 54
@@ -86,6 +114,10 @@
 	li $t1, 4
 	mul $t0, $t0, $t1
 	addi $t0, $t0, 4
+	blez $t0, atoi_error
+	lw $t1, -16($fp)
+	lw $t1, 0($t1)
+	blt $t1, $t0, atoi_error
 	lw $t1, -16($fp)
 	add $t0, $t0, $t1
 	li $t1, 55
@@ -95,6 +127,10 @@
 	li $t1, 4
 	mul $t0, $t0, $t1
 	addi $t0, $t0, 4
+	blez $t0, atoi_error
+	lw $t1, -16($fp)
+	lw $t1, 0($t1)
+	blt $t1, $t0, atoi_error
 	lw $t1, -16($fp)
 	add $t0, $t0, $t1
 	li $t1, 56
@@ -104,6 +140,10 @@
 	li $t1, 4
 	mul $t0, $t0, $t1
 	addi $t0, $t0, 4
+	blez $t0, atoi_error
+	lw $t1, -16($fp)
+	lw $t1, 0($t1)
+	blt $t1, $t0, atoi_error
 	lw $t1, -16($fp)
 	add $t0, $t0, $t1
 	li $t1, 57
@@ -124,6 +164,10 @@ _label_main_1:
 	lw $t1, -20($fp)
 	mul $t0, $t0, $t1
 	addi $t0, $t0, 4
+	blez $t0, atoi_error
+	lw $t1, -16($fp)
+	lw $t1, 0($t1)
+	blt $t1, $t0, atoi_error
 	lw $t1, -16($fp)
 	add $t0, $t0, $t1
 	lw $t0, 0($t0)
