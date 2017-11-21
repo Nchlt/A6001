@@ -67,6 +67,10 @@ rule token = parse
       { OPEN_BRACKET }
   | "]"
       { CLOSE_BRACKET }
+  | "{"
+      { OPEN_CBRACKET }
+  | "}"
+      { CLOSE_CBRACKET }
   | _
       { failwith ("Unknown character : " ^ (lexeme lexbuf)) }
   | eof

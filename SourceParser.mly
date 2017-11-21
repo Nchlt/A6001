@@ -10,7 +10,7 @@
 %token AND OR
 %token EQUAL NEQ LT LE
 %token <string> IDENT
-%token BEGIN END OPEN_BRACKET CLOSE_BRACKET
+%token BEGIN END OPEN_BRACKET CLOSE_BRACKET OPEN_CBRACKET CLOSE_CBRACKET
 %token IF THEN ELSE
 %token WHILE
 %token SEMI
@@ -71,6 +71,12 @@ instructions:
 | i=instruction; SEMI; is=instructions     { i :: is }
 ;
 
+curly_array:
+| OPEN_CBRACKET; l=separated_nonempty_list(SEMI, CONST_INT ); CLOSE_CBRACKET;SEMI
+                                           { l }
+
+
+
 instruction:
 | l=location; SET; e=expression                     { Set(l, e)     }
 | WHILE; e=expression; b=block                      { While(e, b)   }
@@ -79,6 +85,9 @@ instruction:
 | e1=expression; OPEN_BRACKET; e2=expression; CLOSE_BRACKET; SET; e3=expression {
     let loc = ArrayAccess(e1, e2) in
     Set(loc, e3)
+}
+| l=location; SET; ca=curly_array {
+  SetArray(l, ca)
 }
 
 ;

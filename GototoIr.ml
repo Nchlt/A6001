@@ -36,6 +36,9 @@ let flatten_main p =
   and flatten_instruction = function
     (* Ajout *)
     (*ex dada := tab[2] *)
+
+    
+
     |S.Set(Identifier id, Location(ArrayAccess(e1, e2))) ->
       let ce1, ve1 = flatten_expression e1 in
       let ce2, ve2 = flatten_expression e2 in

@@ -28,6 +28,7 @@ and instruction =
   | While of expression * block         (* Boucle      *)
   | If    of expression * block * block (* Branchement *)
   | Print of expression                 (* Affichage   *)
+  | SetArray of location * int list 
 
 and expression =
   | Literal   of literal                         (* Valeur immédiate   *)

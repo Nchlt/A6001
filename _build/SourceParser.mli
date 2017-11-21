@@ -11,6 +11,7 @@ type token =
   | PRINT
   | PLUS
   | OR
+  | OPEN_CBRACKET
   | OPEN_BRACKET
   | NEQ
   | MINUS
@@ -26,6 +27,7 @@ type token =
   | ELSE
   | CONST_INT of (int)
   | CONST_BOOL of (bool)
+  | CLOSE_CBRACKET
   | CLOSE_BRACKET
   | BOOL
   | BEGIN
