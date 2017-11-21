@@ -8,7 +8,7 @@
 %token PLUS MINUS STAR
 %token <bool> CONST_BOOL
 %token AND OR
-%token EQUAL NEQ LT LE
+%token EQUAL NEQ LT LE EQUAL_STRUCT
 %token <string> IDENT
 %token BEGIN END OPEN_BRACKET CLOSE_BRACKET OPEN_CBRACKET CLOSE_CBRACKET
 %token IF THEN ELSE
@@ -72,7 +72,7 @@ instructions:
 ;
 
 curly_array:
-| OPEN_CBRACKET; l=separated_nonempty_list(SEMI, CONST_INT ); CLOSE_CBRACKET;SEMI
+| OPEN_CBRACKET; l=separated_nonempty_list(SEMI, CONST_INT ); CLOSE_CBRACKET;
                                            { l }
 
 
@@ -86,7 +86,7 @@ instruction:
     let loc = ArrayAccess(e1, e2) in
     Set(loc, e3)
 }
-| l=location; SET; ca=curly_array {
+| l=location; EQUAL_STRUCT; ca=curly_array {
   SetArray(l, ca)
 }
 

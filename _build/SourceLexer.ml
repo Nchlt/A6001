@@ -27,14 +27,14 @@
 # 28 "SourceLexer.ml"
 let __ocaml_lex_tables = {
   Lexing.lex_base =
-   "\000\000\233\255\234\255\235\255\236\255\237\255\238\255\002\000\
+   "\000\000\232\255\233\255\235\255\236\255\237\255\238\255\002\000\
     \001\000\001\000\002\000\003\000\245\255\246\255\247\255\004\000\
     \249\255\250\255\088\000\018\000\002\000\002\000\254\255\248\255\
     \244\255\243\255\241\255\240\255\239\255\036\000\252\255\253\255\
     \005\000\005\000\255\255\254\255";
   Lexing.lex_backtrk =
-   "\255\255\255\255\255\255\255\255\255\255\255\255\255\255\021\000\
-    \021\000\013\000\021\000\021\000\255\255\255\255\255\255\021\000\
+   "\255\255\255\255\255\255\255\255\255\255\255\255\255\255\022\000\
+    \022\000\013\000\022\000\021\000\255\255\255\255\255\255\022\000\
     \255\255\255\255\003\000\002\000\004\000\000\000\255\255\255\255\
     \255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\255\
     \002\000\002\000\255\255\255\255";
@@ -259,13 +259,18 @@ and __ocaml_lex_token_rec lexbuf __ocaml_lex_state =
 
   | 21 ->
 # 75 "SourceLexer.mll"
-      ( failwith ("Unknown character : " ^ (lexeme lexbuf)) )
+      ( EQUAL_STRUCT )
 # 264 "SourceLexer.ml"
 
   | 22 ->
 # 77 "SourceLexer.mll"
-      ( EOF )
+      ( failwith ("Unknown character : " ^ (lexeme lexbuf)) )
 # 269 "SourceLexer.ml"
+
+  | 23 ->
+# 79 "SourceLexer.mll"
+      ( EOF )
+# 274 "SourceLexer.ml"
 
   | __ocaml_lex_state -> lexbuf.Lexing.refill_buff lexbuf;
       __ocaml_lex_token_rec lexbuf __ocaml_lex_state
@@ -275,24 +280,24 @@ and comment lexbuf =
 and __ocaml_lex_comment_rec lexbuf __ocaml_lex_state =
   match Lexing.engine __ocaml_lex_tables __ocaml_lex_state lexbuf with
       | 0 ->
-# 81 "SourceLexer.mll"
-      ( comment lexbuf; comment lexbuf )
-# 281 "SourceLexer.ml"
-
-  | 1 ->
 # 83 "SourceLexer.mll"
-      ( () )
+      ( comment lexbuf; comment lexbuf )
 # 286 "SourceLexer.ml"
 
-  | 2 ->
+  | 1 ->
 # 85 "SourceLexer.mll"
-      ( comment lexbuf )
+      ( () )
 # 291 "SourceLexer.ml"
 
-  | 3 ->
+  | 2 ->
 # 87 "SourceLexer.mll"
-      ( failwith "Unterminated comment" )
+      ( comment lexbuf )
 # 296 "SourceLexer.ml"
+
+  | 3 ->
+# 89 "SourceLexer.mll"
+      ( failwith "Unterminated comment" )
+# 301 "SourceLexer.ml"
 
   | __ocaml_lex_state -> lexbuf.Lexing.refill_buff lexbuf;
       __ocaml_lex_comment_rec lexbuf __ocaml_lex_state

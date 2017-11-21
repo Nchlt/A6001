@@ -62,19 +62,20 @@ ocamlfind ocamldep -modules SourceInterpreter.ml > SourceInterpreter.ml.depends 
 # Target: SourceInterpreter.cmo, tags: { byte, compile, extension:cmo, extension:ml, file:SourceInterpreter.cmo, file:SourceInterpreter.ml, implem, ocaml, quiet, traverse }
 ocamlfind ocamlc -c -w -40 -o SourceInterpreter.cmo SourceInterpreter.ml # cached
 # Target: SourceLexer.mll, tags: { extension:mll, file:SourceLexer.mll, lexer, ocaml, ocamllex, quiet, traverse }
-ocamllex.opt -q SourceLexer.mll # cached
+ocamllex.opt -q SourceLexer.mll
 # Target: SourceLexer.ml.depends, tags: { extension:ml, file:SourceLexer.ml, ocaml, ocamldep, quiet, traverse }
-ocamlfind ocamldep -modules SourceLexer.ml > SourceLexer.ml.depends # cached
+ocamlfind ocamldep -modules SourceLexer.ml > SourceLexer.ml.depends
 # Target: SourceParser.mly.depends, tags: { extension:mly, file:SourceParser.mly, infer, menhir_ocamldep, ocaml, ocamldep, quiet, traverse }
-menhir --raw-depend --ocamldep 'ocamlfind ocamldep -modules' SourceParser.mly > SourceParser.mly.depends # cached
+menhir --raw-depend --ocamldep 'ocamlfind ocamldep -modules' SourceParser.mly > SourceParser.mly.depends
 # Target: SourceParser.mly, tags: { byte, compile, extension:ml, extension:mly, file:SourceParser.ml, file:SourceParser.mly, infer, menhir, ocaml, parser, quiet, traverse }
-menhir --ocamlc 'ocamlfind ocamlc -w -40' --infer SourceParser.mly # cached
+menhir --ocamlc 'ocamlfind ocamlc -w -40' --infer SourceParser.mly
++ menhir --ocamlc 'ocamlfind ocamlc -w -40' --infer SourceParser.mly
+Warning: 10 states have shift/reduce conflicts.
+Warning: 10 shift/reduce conflicts were arbitrarily resolved.
 # Target: SourceParser.mli.depends, tags: { extension:mli, file:SourceParser.mli, ocaml, ocamldep, quiet, traverse }
-ocamlfind ocamldep -modules SourceParser.mli > SourceParser.mli.depends # cached
+ocamlfind ocamldep -modules SourceParser.mli > SourceParser.mli.depends
 # Target: SourceParser.cmi, tags: { byte, compile, extension:mli, file:SourceParser.mli, interf, ocaml, quiet, traverse }
-ocamlfind ocamlc -c -w -40 -o SourceParser.cmi SourceParser.mli # cached
-# Target: SourceLexer.cmo, tags: { byte, compile, extension:cmo, extension:ml, file:SourceLexer.cmo, file:SourceLexer.ml, implem, ocaml, quiet, traverse }
-ocamlfind ocamlc -c -w -40 -o SourceLexer.cmo SourceLexer.ml # cached
+ocamlfind ocamlc -c -w -40 -o SourceParser.cmi SourceParser.mli
 # Target: SourceTypeChecker.ml.depends, tags: { extension:ml, file:SourceTypeChecker.ml, ocaml, ocamldep, quiet, traverse }
 ocamlfind ocamldep -modules SourceTypeChecker.ml > SourceTypeChecker.ml.depends # cached
 # Target: SourceTypeChecker.cmo, tags: { byte, compile, extension:cmo, extension:ml, file:SourceTypeChecker.cmo, file:SourceTypeChecker.ml, implem, ocaml, quiet, traverse }
@@ -87,8 +88,10 @@ ocamlfind ocamlc -c -w -40 -o SourcetoUntyped.cmo SourcetoUntyped.ml # cached
 ocamlfind ocamldep -modules UntypedtoGoto.ml > UntypedtoGoto.ml.depends # cached
 # Target: UntypedtoGoto.cmo, tags: { byte, compile, extension:cmo, extension:ml, file:UntypedtoGoto.cmo, file:UntypedtoGoto.ml, implem, ocaml, quiet, traverse }
 ocamlfind ocamlc -c -w -40 -o UntypedtoGoto.cmo UntypedtoGoto.ml # cached
+# Target: SourceLexer.cmo, tags: { byte, compile, extension:cmo, extension:ml, file:SourceLexer.cmo, file:SourceLexer.ml, implem, ocaml, quiet, traverse }
+ocamlfind ocamlc -c -w -40 -o SourceLexer.cmo SourceLexer.ml
 # Target: Main.cmo, tags: { byte, compile, extension:cmo, extension:ml, file:Main.cmo, file:Main.ml, implem, ocaml, quiet, traverse }
-ocamlfind ocamlc -c -w -40 -o Main.cmo Main.ml # cached
+ocamlfind ocamlc -c -w -40 -o Main.cmo Main.ml
 # Target: SourceAst.cmx, tags: { compile, extension:cmx, extension:ml, file:SourceAst.cmx, file:SourceAst.ml, implem, native, ocaml, quiet, traverse }
 ocamlfind ocamlopt -c -w -40 -o SourceAst.cmx SourceAst.ml # cached
 # Target: UntypedAst.cmx, tags: { compile, extension:cmx, extension:ml, file:UntypedAst.cmx, file:UntypedAst.ml, implem, native, ocaml, quiet, traverse }
@@ -120,19 +123,19 @@ ocamlfind ocamlopt -c -w -40 -o IrtoAllocated.cmx IrtoAllocated.ml # cached
 # Target: SourceInterpreter.cmx, tags: { compile, extension:cmx, extension:ml, file:SourceInterpreter.cmx, file:SourceInterpreter.ml, implem, native, ocaml, quiet, traverse }
 ocamlfind ocamlopt -c -w -40 -o SourceInterpreter.cmx SourceInterpreter.ml # cached
 # Target: SourceParser.ml.depends, tags: { extension:ml, file:SourceParser.ml, ocaml, ocamldep, quiet, traverse }
-ocamlfind ocamldep -modules SourceParser.ml > SourceParser.ml.depends # cached
+ocamlfind ocamldep -modules SourceParser.ml > SourceParser.ml.depends
 # Target: SourceParser.cmx, tags: { compile, extension:cmx, extension:ml, file:SourceParser.cmx, file:SourceParser.ml, implem, native, ocaml, quiet, traverse }
-ocamlfind ocamlopt -c -w -40 -o SourceParser.cmx SourceParser.ml # cached
-# Target: SourceLexer.cmx, tags: { compile, extension:cmx, extension:ml, file:SourceLexer.cmx, file:SourceLexer.ml, implem, native, ocaml, quiet, traverse }
-ocamlfind ocamlopt -c -w -40 -o SourceLexer.cmx SourceLexer.ml # cached
+ocamlfind ocamlopt -c -w -40 -o SourceParser.cmx SourceParser.ml
 # Target: SourceTypeChecker.cmx, tags: { compile, extension:cmx, extension:ml, file:SourceTypeChecker.cmx, file:SourceTypeChecker.ml, implem, native, ocaml, quiet, traverse }
 ocamlfind ocamlopt -c -w -40 -o SourceTypeChecker.cmx SourceTypeChecker.ml # cached
 # Target: SourcetoUntyped.cmx, tags: { compile, extension:cmx, extension:ml, file:SourcetoUntyped.cmx, file:SourcetoUntyped.ml, implem, native, ocaml, quiet, traverse }
 ocamlfind ocamlopt -c -w -40 -o SourcetoUntyped.cmx SourcetoUntyped.ml # cached
 # Target: UntypedtoGoto.cmx, tags: { compile, extension:cmx, extension:ml, file:UntypedtoGoto.cmx, file:UntypedtoGoto.ml, implem, native, ocaml, quiet, traverse }
 ocamlfind ocamlopt -c -w -40 -o UntypedtoGoto.cmx UntypedtoGoto.ml # cached
+# Target: SourceLexer.cmx, tags: { compile, extension:cmx, extension:ml, file:SourceLexer.cmx, file:SourceLexer.ml, implem, native, ocaml, quiet, traverse }
+ocamlfind ocamlopt -c -w -40 -o SourceLexer.cmx SourceLexer.ml
 # Target: Main.cmx, tags: { compile, extension:cmx, extension:ml, file:Main.cmx, file:Main.ml, implem, native, ocaml, quiet, traverse }
-ocamlfind ocamlopt -c -w -40 -o Main.cmx Main.ml # cached
+ocamlfind ocamlopt -c -w -40 -o Main.cmx Main.ml
 # Target: Main.native, tags: { dont_link_with, extension:native, file:Main.native, link, native, ocaml, program, quiet, traverse }
-ocamlfind ocamlopt -linkpkg SourceAst.cmx UntypedAst.cmx GotoAst.cmx IrAst.cmx AllocatedAst.cmx Mips.cmx AllocatedtoMips.cmx GototoIr.cmx Graph.cmx GraphColoring.cmx IrLiveness.cmx IrDeadCodeElim.cmx IrInterferenceGraph.cmx IrtoAllocated.cmx SourceInterpreter.cmx SourceParser.cmx SourceLexer.cmx SourceTypeChecker.cmx SourcetoUntyped.cmx UntypedtoGoto.cmx Main.cmx -o Main.native # cached
+ocamlfind ocamlopt -linkpkg SourceAst.cmx UntypedAst.cmx GotoAst.cmx IrAst.cmx AllocatedAst.cmx Mips.cmx AllocatedtoMips.cmx GototoIr.cmx Graph.cmx GraphColoring.cmx IrLiveness.cmx IrDeadCodeElim.cmx IrInterferenceGraph.cmx IrtoAllocated.cmx SourceInterpreter.cmx SourceParser.cmx SourceLexer.cmx SourceTypeChecker.cmx SourcetoUntyped.cmx UntypedtoGoto.cmx Main.cmx -o Main.native
 # Compilation successful.
