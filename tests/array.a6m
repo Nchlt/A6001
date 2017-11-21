@@ -3,7 +3,7 @@ main(integer x) (
   var integer res;
 
   tab := [3]integer;
-  tab := {1;37;3};
+  tab = {1;37;3};
   res:= tab[1];
   print(res);
 

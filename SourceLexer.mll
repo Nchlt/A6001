@@ -75,6 +75,8 @@ rule token = parse
       { OPEN_CBRACKET }
   | "}"
       { CLOSE_CBRACKET }
+  | "="
+      { EQUAL_STRUCT }
   | _
       { failwith ("Unknown character : " ^ (lexeme lexbuf)) }
   | eof

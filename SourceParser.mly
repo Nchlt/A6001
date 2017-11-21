@@ -72,7 +72,7 @@ instructions:
 ;
 
 curly_array:
-| OPEN_CBRACKET; l=separated_nonempty_list(SEMI, CONST_INT ); CLOSE_CBRACKET;SEMI
+| OPEN_CBRACKET; l=separated_nonempty_list(SEMI, CONST_INT ); CLOSE_CBRACKET;
                                            { l }
 
 
@@ -86,6 +86,7 @@ instruction:
     let loc = ArrayAccess(e1, e2) in
     Set(loc, e3)
 }
+
 | FOR; BEGIN; l=location; EQUAL_STRUCT; e=expression; TO; borne_sup=expression; END; BEGIN;
 ins=instructions; END {
   let cond = Binop(Lt, Location(l), borne_sup) in
@@ -98,7 +99,10 @@ ins=instructions; END {
 
 }
 
-| l=location; SET; ca=curly_array {
+| l=location; EQUAL_STRUCT; ca=curly_array {
+
+
+
   SetArray(l, ca)
 }
 
