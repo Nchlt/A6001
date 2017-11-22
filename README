@@ -1,0 +1,94 @@
+=================================
+|    Compilateur langage A6001  |
+=================================
+        Rendu Sequence 2
+Nouredine Nour & Malik Kazi-Aoual
+
+https://github.com/Nchlt/A6001.git (OCaml version 4.05.0)
+
+Les TP 5 (fonctions) et 6,7,8 sont dans deux versions du
+compilateur séparés respectivement dans les dossiers
+tp-fonction et tp-tableaux
+
+
+TP Tableaux et suite:
+=====================
+
+Le contrat de base des tableau est respecté:
+============================================
+  Création d'un tableau non initialisé d'un taille donnée
+  Lecture d'une valeur du tableau
+  Ecriture d'une valeur dans une case du tableau
+
+  Dans le dossier test vous trouverez des exemples de code pour
+  tester cela.
+
+  Attention, il reste cependant quelques éléments à régler :
+    On ne peut pas print la case d'un tableau directement sans
+    passer par une variabe :
+    Pour print tab[2]: ma_variable := tab[2]; print(ma_variable);
+
+    les expression du type tab[i] := tab[i-1] + tab[i-2] ne fonctionnent
+    pas et doivent aussi passer par des variables intermédiaires:
+    tm1 := tab[i-1]; tm2 := tab[i-2]; tab[i] := tm1 + tm2;
+
+L'extention 3.1:
+================
+
+  La vérification des bornes du tableau lors d'un lecture ou écriture
+  est implémenté. Cette dernière ne lève pas d'exeption puisqu'elle est
+  implémenter directement au niveau du code mips généré.
+  Elle se contente de sauter au label "atoi_error" si l'indice du tableau
+  dépasse la taille du tableau ou est négatif.
+  Ce morceau de code responsable de la vérification peut etre trouvé
+  dans le fichier AllocatedtoMips.ml au niveau de Load et Store.
+
+L'extention 3.2:
+================
+
+  Les boucles inconditionnelles ont été ajoutées (bien que nous n'avons
+  pas compris le rapport avec les tableaux). Il est à noté que la
+  variable utilisée dans la boucle doit avoir préalablement  été déclarée (mais
+  pas frocément initialisée)
+  le test for.a6m est disponible dans tests/ il print 10 fois le symbole
+  "%".
+
+L'extention 3.3: (uniquement pour les int pour l'instant)
+================
+
+  Après avoir déclaré un tableau, et avoir précisé sa taille.
+  ex :
+        var []integer tab;
+        tab := [3]integer;
+  Il est possible d'initiliser le tableau comme tel :
+        tab := {1;37;10};
+
+  Pour l'instant cette fonctionnalitée ne concerne que les tableaux
+  d'entier mais pourrait être facilement étendue.
+
+
+TP Fonctions :
+==============
+
+Nous avons mis en place les modifications de la grammaire et
+propagé dans les différentes représentations intermédiares les
+modification à apporter.
+
+Il nous reste à compléter quelques action sémantique concernant
+les table des symboles des fonction dans le SourceParser.
+
+Il nous reste également à adapter le Main à la nouvelle structure
+du programme. En effet un programme étant maintenant un ensemble
+de fonctions ayant leur table des symboles propre, tout les traitements
+du Main doivent maitenant être mapés (iter ou fold) sur l'ensemble
+de ses tables de symboles.
+
+Il reste à compléter AllocatedtoMips afin de réserver dans la pile
+un emplacement pour chaque fonction et ses variables locales.
+
+TP 7 : à traiter
+======
+
+
+TP 8 : à traiter
+======
